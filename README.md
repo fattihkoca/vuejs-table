@@ -1,4 +1,4 @@
-# vuejs-overlay
+# vuejs-table
 
 `Vue.js Table` is a practical, modern and convenient `data table` component for `Vue.js`.
 
