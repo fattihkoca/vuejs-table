@@ -1,0 +1,47 @@
+@import "./library/utils";
+@import "./library/mixins";
+@import "./library/extends";
+
+.v-table-controls {
+  padding: #{$cell-space}px #{$cell-space}px 0 #{$cell-space}px;
+
+  &-wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: stretch;
+  }
+
+  &-col {
+    @extend %flex;
+    @extend %align-items-center;
+
+    &:last-child {
+      justify-self: end;
+    }
+  }
+}
+
+.v-table-control {
+  margin: 0 #{$cell-space}px #{$cell-space}px 0;
+
+  .v-table-search {
+    @extend %flex;
+    @extend %align-items-center;
+    padding: $search-padding;
+    background: $box-color;
+    border-radius: #{$box-radius}px;
+    @extend %overflow-hidden;
+
+    input {
+      min-width: 200px;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-size: $medium-text;
+    }
+  }
+
+  &.v-table-all-checkbox {
+    margin-right: #{($cell-space * 2)}px;
+  }
+}

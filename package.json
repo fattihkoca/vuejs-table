@@ -1,0 +1,65 @@
+{
+  "name": "vuejs-table",
+  "version": "0.0.1",
+  "description": "Table component for Vue.js",
+  "keywords": [
+    "vue table component",
+    "vue table",
+    "data table",
+    "dynamic html table"
+  ],
+  "main": "dist/vuejs-table.min.js",
+  "author": "Fatih Koca <fattih@fattih.com>",
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js | npm run demo",
+    "lint": "jshint *.js",
+    "demo": "webpack --config webpack.demo.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fattihkoca/vuejs-table.git"
+  },
+  "private": false,
+  "dependencies": {
+    "vue": "^2.6.10",
+    "vuejs-ajax": "^1.3.93",
+    "vuejs-overlay": "0.0.23",
+    "vuejs-title": "^1.0.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/register": "^7.7.7",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-istanbul": "^5.1.1",
+    "browser-sync": "^2.26.7",
+    "browser-sync-webpack-plugin": "^2.0.1",
+    "css-loader": "^1.0.0",
+    "custom-event": "^1.0.1",
+    "expect": "^24.9.0",
+    "jsdom": "^11.12.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^5.2.0",
+    "mocha-webpack": "^1.1.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "uglifyjs-webpack-plugin": "^1.3.0",
+    "vue-loader": "^15.8.3",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-merge": "^4.1.4",
+    "webpack-node-externals": "^1.7.2",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "bugs": {
+    "url": "https://github.com/fattihkoca/vuejs-table/issues"
+  },
+  "homepage": "https://github.com/fattihkoca/vuejs-table#readme"
+}

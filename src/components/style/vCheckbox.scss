@@ -1,0 +1,69 @@
+@import "library/utils";
+@import "./library/mixins";
+@import "library/extends";
+
+.v-checkbox {
+  @extend %block;
+  @extend %unselectable;
+  @extend %relative;
+  @extend %pointer;
+  font-size: 22px;
+
+  input {
+    @extend %absolute;
+    @extend %pointer;
+    top: 0;
+    left: 0;
+    @extend %margin-none;
+    @extend %padding-none;
+    opacity: 0;
+  }
+
+  &:not(.v-checkbox-labelled), input, &-mark {
+    @include size($check-box-size);
+  }
+
+  &.v-checkbox-labelled {
+    @extend %inline-flex;
+    @extend %align-items-center;
+
+    .v-checkbox-label {
+      margin-left: $check-box-size + 5px;
+      @extend %gray-color;
+      @extend %small-text;
+      @extend %unselectable;
+    }
+  }
+
+  &-mark {
+    @extend %absolute;
+    top: 0;
+    left: 0;
+    background-color: $box-color;
+    border-radius: #{$box-radius}px;
+
+    &:after {
+      content: "";
+      @extend %absolute;
+      display: none;
+      top: 5px;
+      left: 9px;
+      @include size(5, 10);
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  &:hover input ~ &-mark {
+    opacity: .9;
+  }
+
+  input:checked ~ &-mark {
+    background-color: $blue-color;
+  }
+
+  input:checked ~ &-mark:after {
+    @extend %block;
+  }
+}

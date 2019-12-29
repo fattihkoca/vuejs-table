@@ -1,0 +1,128 @@
+{
+  "request": {
+    "url": "/request/detail-response.json",
+    "method": "get",
+    "label": "Update"
+  },
+  "header": {
+    "title": "Details of Content",
+    "subtitle": "With this form, you can edit the content of the table."
+  },
+  "form": [
+    {
+      "title": "Input Text",
+      "required": true,
+      "tips": {
+        "title": "First item",
+        "detail": "This is the first item"
+      },
+      "elements": [
+        {
+          "placeholder": "First item",
+          "type": "text",
+          "name": "first",
+          "value": "My First Value",
+          "limit": 25
+        }
+      ]
+    },
+    {
+      "title": "Textarea Text",
+      "tips": {
+        "title": "Second item",
+        "detail": "This is the second item"
+      },
+      "elements": [
+        {
+          "placeholder": "Second item",
+          "type": "textarea",
+          "name": "second",
+          "value": "My Second Value"
+        }
+      ]
+    },
+    {
+      "title": "Two Input Text",
+      "tips": {
+        "title": "Third item",
+        "detail": "This is the third item"
+      },
+      "elements": [
+        {
+          "placeholder": "3.1 item",
+          "type": "text",
+          "name": "third-one",
+          "value": "My Third - one Value",
+          "limit": 25
+        },
+        {
+          "placeholder": "3.2 item",
+          "type": "text",
+          "name": "third-two",
+          "value": "My Third - two Value",
+          "limit": 25
+        }
+      ]
+    },
+    {
+      "title": "Select",
+      "required": true,
+      "tips": {
+        "title": "Fifth item",
+        "detail": "This is the fifth item"
+      },
+      "elements": [
+        {
+          "placeholder": "Select an item",
+          "type": "select",
+          "name": "fifth",
+          "selected": "opt_2",
+          "options": {
+            "opt_1": "Option 1",
+            "opt_2": "Option 2",
+            "opt_3": "Option 3"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Checkbox",
+      "required": true,
+      "tips": {
+        "title": "Sixth item",
+        "detail": "This is the sixth item"
+      },
+      "elements": [
+        {
+          "type": "checkbox",
+          "name": "sixth",
+          "label": "Label",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "title": "Checkbox",
+      "required": true,
+      "tips": {
+        "title": "Seventh item",
+        "detail": "This is the seventh item"
+      },
+      "elements": [
+        {
+          "type": "radio",
+          "name": "seventh",
+          "value": "one",
+          "label": "Opt 1",
+          "checked": true
+        },
+        {
+          "type": "radio",
+          "name": "seventh",
+          "label": "Opt 2",
+          "value": "two"
+        }
+      ]
+    }
+  ]
+}

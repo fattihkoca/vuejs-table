@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "message": "The data has been updated!!",
+  "data": {
+    "key": 6,
+    "cells": [
+      {
+        "status": "warning",
+        "text": "Item Updated"
+      },
+      {
+        "progress": 30
+      },
+      {
+
+        "text": "Updated row!"
+      }
+    ]
+  }
+}

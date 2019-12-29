@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "message": "The new data has been created!!",
+  "data": {
+    "key": 5,
+    "cells": [
+      {
+        "text": "Item Five",
+        "bgColor": "green"
+      },
+      {
+        "rating": 0
+      },
+      {
+        "status": "info",
+        "html": "<b>New row!</b>"
+      }
+    ]
+  }
+}

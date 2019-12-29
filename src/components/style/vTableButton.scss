@@ -1,0 +1,45 @@
+@import "./library/utils";
+@import "./library/mixins";
+@import "./library/extends";
+
+.v-table-button {
+  @extend %pointer;
+  @include size($button-size);
+  @extend %unselectable;
+  @extend %margin-none;
+  @extend %padding-none;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &, & * {
+    @extend %block;
+  }
+
+  &-icon {
+    padding: 2.5px
+  }
+
+  &-icon {
+    svg path {
+      fill: $tool-color;
+    }
+  }
+
+  &.v-table-button-create {
+    position: relative;
+    @include round(36);
+    background: $blue-color;
+
+    i {
+      @extend %absolute;
+      top: calc(50% - 7px);
+      left: calc(50% - 7px);
+      @include size(14);
+    }
+
+    svg path {
+      fill: #FFF;
+    }
+  }
+}

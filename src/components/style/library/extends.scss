@@ -1,0 +1,164 @@
+@import "./utils";
+
+%fixed {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+%absolute {
+  position: absolute
+}
+
+%relative {
+  position: relative
+}
+
+%block {
+  display: block
+}
+
+%hide {
+  display: none;
+}
+
+%flex {
+  display: flex
+}
+
+%inline-flex {
+  display: inline-flex
+}
+
+%align-items-center {
+  align-items: center;
+}
+
+%inline-block {
+  display: inline-block
+}
+
+%edge {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+%overflow-hidden {
+  overflow: hidden;
+}
+
+%overflow-auto {
+  overflow: auto;
+}
+
+%pointer {
+  cursor: pointer;
+}
+
+%unselectable {
+  user-select: none;
+}
+
+%bold {
+  font-weight: bold;
+}
+
+%bolder {
+  font-weight: bolder;
+}
+
+%italic {
+  font-style: italic;
+}
+
+%underline {
+  text-decoration: underline;
+}
+
+%big-text {
+  font-size: $big-text;
+}
+
+%medium-text {
+  font-size: $medium-text;
+}
+
+%small-text {
+  font-size: $small-text;
+}
+
+%margin-none {
+  margin: 0
+}
+
+%padding-none {
+  padding: 0
+}
+
+%bg-blue {
+  background-color: $blue-color !important;
+}
+
+%bg-green {
+  background-color: $green-color !important;
+}
+
+%bg-red {
+  background-color: $red-color !important;
+}
+
+%bg-yellow {
+  background-color: $yellow-color !important;
+}
+
+%bg-cyan {
+  background-color: $cyan-color !important;
+}
+
+%bg-white {
+  background-color: $white-color !important;
+}
+
+%bg-black {
+  background-color: $black-color !important;
+}
+
+%bg-gray {
+  background-color: $gray-color !important;
+}
+
+%gray-color {
+  color: $gray-color;
+}
+
+%border-color {
+  border-color: rgba($primary-color, .1);
+}
+
+%fit-child-img {
+  @extend %relative;
+  @extend %overflow-hidden;
+
+  img {
+    @extend %absolute;
+    @extend %edge;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@keyframes v-table-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+%animate-spin {
+  animation: v-table-spin .6s infinite linear;
+}

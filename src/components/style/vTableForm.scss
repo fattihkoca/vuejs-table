@@ -1,0 +1,165 @@
+@import "./library/utils";
+@import "./library/mixins";
+@import "./library/extends";
+
+.v-table-form {
+  &-header {
+    margin-bottom: #{$head-padding}px;
+    padding-bottom: #{$head-padding}px;
+    border-bottom: 1px solid;
+    @extend %border-color;
+
+    * {
+      @extend %margin-none;
+    }
+  }
+
+  &-title {
+    @extend %big-text;
+  }
+
+  &-subtitle {
+    @extend %gray-color;
+    @extend %small-text;
+    font-weight: normal;
+  }
+
+  &-items {
+    @extend %relative;
+    margin: #{$cell-space}px auto 0;
+    max-width: 600px;
+  }
+
+  &-row {
+    display: grid;
+    grid-template-columns: auto auto;
+    @extend %align-items-center;
+    column-gap: #{$cell-space}px;
+    margin-bottom: #{$cell-space * 2}px;
+
+    &.v-table-form-labelled {
+      grid-template-columns: minmax(0, 120px) auto;
+    }
+  }
+
+  &-title {
+    @extend %gray-color;
+    @extend %small-text;
+  }
+
+  &-required {
+    &:after {
+      color: $red-color;
+      content: '*';
+      @extend %medium-text;
+      @extend %bold;
+    }
+  }
+
+  &-tips {
+    @extend %gray-color;
+
+    * {
+      @extend %block;
+      @extend %margin-none;
+    }
+  }
+
+  &-tip-title {
+    @extend %medium-text;
+    @extend %bold;
+  }
+
+  &-tip-detail {
+    @extend %small-text;
+  }
+
+  &-elements {
+    @extend %flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &-element {
+    width: 100%;
+
+    &:nth-child(n+2) {
+      margin-left: #{$head-padding}px;
+    }
+
+    input[type=text], input[type=password], input[type=number], input[type=date], input[type=email], input[type=tel], input[type=url], input[type=week], input[type=month], textarea, select {
+      @extend %block;
+      padding: #{$head-padding}px;
+      @extend %medium-text;
+      color: $primary-color;
+      background-color: $white-color;
+      border: rgba($primary-color, .5) 1px solid;
+      width: calc(100% - #{$head-padding * 2}px - 2px);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    select {
+      @extend %margin-none;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      &::-ms-expand {
+        @extend %hide;
+      }
+    }
+  }
+
+  &-multiple-elements {
+    .v-table-form-element {
+      width: auto;
+    }
+  }
+
+  &-actions {
+    @extend %flex;
+    flex-wrap: wrap;
+  }
+
+  &-button {
+    @extend %inline-flex;
+    padding: #{$head-padding}px #{$head-padding * 2}px;
+    color: $white-color;
+    background: $blue-color;
+    @extend %medium-text;
+    @extend %bold;
+    border-radius: #{$box-radius}px;
+    border: none;
+    outline: none;
+    @extend %pointer;
+
+    &:nth-child(n+2) {
+      margin-left: 5px;
+    }
+
+    &:hover {
+      background: rgba($blue-color, .9);
+    }
+
+    &-loading {
+      margin-right: 5px;
+      @include size(20);
+    }
+  }
+
+  &-response {
+    margin-top: 5px;
+    @extend %bold;
+  }
+
+  &-success {
+    color: $green-color;
+  }
+
+  &-failed {
+    color: $red-color;
+  }
+}

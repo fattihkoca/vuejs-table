@@ -1,0 +1,27 @@
+@import "library/extends";
+
+.v-rating {
+  @extend %inline-flex;
+  @extend %align-items-center;
+
+  &-wrapper {
+    @extend %relative;
+    @extend %inline-block;
+  }
+
+  &-icons {
+    @extend %flex;
+    @extend %align-items-center;
+  }
+
+  &-icon {
+    @extend %block;
+    padding: 1px;
+  }
+
+  &-filled {
+    @extend %absolute;
+    @extend %overflow-hidden;
+    z-index: 2;
+  }
+}

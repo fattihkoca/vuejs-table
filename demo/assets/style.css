@@ -1,0 +1,10 @@
+html, body {
+    @extend %margin-none;
+    @extend %padding-none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+}
+
+#demo {
+    padding: 50px;
+}

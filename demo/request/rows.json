@@ -1,0 +1,71 @@
+[
+  {
+    "key": 1,
+    "cells": [
+      {
+        "text": "Item One",
+        "bgColor": "blue"
+      },
+      {
+        "rating": 50
+      },
+      {
+        "status": "success",
+        "html": "<b>Excellent!</b>"
+      }
+    ]
+  },
+  {
+    "key": 2,
+    "cells": [
+      {
+        "status": "primary",
+        "text": "Item Two",
+        "font": ["b"]
+      },
+      {
+        "rating": 75,
+        "text": "Very Good"
+      },
+      {
+        "tags": ["Vue.js", "Node.js", "Laravel", "Scss"]
+      }
+    ]
+  },
+  {
+    "key": 3,
+    "cells": [
+      {
+        "text": "Item Three",
+        "size": "big"
+      },
+      {
+        "progress": 75
+      },
+      {
+        "image": "/request/image.jpeg",
+        "imageSize": "medium",
+        "text": "My cute dog 😍"
+      }
+    ]
+  },
+  {
+    "key": 4,
+    "cells": [
+      {
+        "text": "Item Four",
+        "size": "small"
+      },
+      {
+        "text": "Item Four",
+        "size": "small",
+        "font": ["b", "i", "u"]
+      },
+      {
+        "image": "/request/icon.svg",
+        "imageSize": "small",
+        "text": "Processing"
+      }
+    ]
+  }
+]

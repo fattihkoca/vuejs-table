@@ -1,0 +1,242 @@
+@import "./library/utils";
+@import "./library/extends";
+@import "./library/mixins";
+@import "./vCheckbox";
+@import "./vRadio";
+@import "./vProgress";
+@import "./vRating";
+@import "./vTableForm";
+
+.v-table {
+  &, & * {
+    box-sizing: border-box;
+  }
+
+  @extend %medium-text;
+  @extend %block;
+  @import "./vTableControl";
+  @import "./vTableButton";
+
+  &-field {
+    display: table;
+    table-layout: auto;
+    width: 100%;
+  }
+
+  &-row-group {
+    display: table-row-group;
+  }
+
+  &-row {
+    @extend %relative;
+    display: table-row;
+    @extend %overflow-hidden;
+  }
+
+  &-cell {
+    @extend %relative;
+    display: table-cell;
+    padding: #{$cell-space}px;
+    vertical-align: middle;
+    border-top: 1px solid;
+    @extend %border-color;
+    color: $primary-color;
+
+    &-wrapper {
+      @extend %flex;
+      flex-wrap: wrap;
+      @extend %align-items-center;
+    }
+  }
+
+  &-item {
+    &:nth-child(n+2) {
+      margin-left: 10px;
+    }
+  }
+
+  &-row:first-child &-cell {
+    border-color: transparent;
+  }
+
+  &-head {
+    padding-bottom: #{$head-padding}px;
+    @extend %unselectable;
+
+    .v-table-cell {
+      color: rgba($primary-color, .5);
+      vertical-align: middle;
+
+      .v-table-sort-icon {
+        position: relative;
+        margin: -5px 0 0 10px;
+
+        &:after {
+          content: "";
+          display: inline-block;
+          @include size(10, 10);
+          border: solid rgba($primary-color, .5);
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+      }
+
+      &.v-table-sort-handle {
+        &.v-table-sort {
+          color: $blue-color;
+          @extend %bolder;
+
+          .v-table-sort-icon {
+            &:after {
+              border-color: $blue-color;
+            }
+          }
+
+          &.v-table-sort-desc {
+            .v-table-sort-icon {
+              margin-top: 0;
+              margin-bottom: -5px;
+
+              &:after {
+                transform: rotate(-135deg);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &-label {
+      @extend %inline-flex;
+      @extend %align-items-center;
+      @extend %medium-text;
+      @extend %bold;
+      @extend %pointer;
+    }
+  }
+
+  &-text {
+    &-bold {
+      @extend %bold;
+    }
+
+    &-italic {
+      @extend %italic;
+    }
+
+    &-underline {
+      @extend %underline;
+    }
+
+    &-big {
+      @extend %big-text;
+    }
+
+    &-medium {
+      @extend %medium-text;
+    }
+
+    &-small {
+      @extend %small-text;
+    }
+  }
+
+  &-img {
+    @extend %margin-none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+
+    @extend %fit-child-img;
+
+    &.v-table-img-big {
+      @include round(75);
+    }
+
+    &, &.v-table-img-medium {
+      @include round(50);
+    }
+
+    &.v-table-img-small {
+      @include round(25);
+    }
+  }
+
+  &-status {
+    display: inline-block;
+    @include round($status-size);
+    background-color: $primary-color;
+  }
+
+  &-status {
+    &-primary {
+      @extend %bg-blue;
+    }
+
+    &-secondary {
+      @extend %bg-gray;
+    }
+
+    &-success {
+      @extend %bg-green;
+    }
+
+    &-danger {
+      @extend %bg-red;
+    }
+
+    &-warning {
+      @extend %bg-yellow;
+    }
+
+    &-info {
+      @extend %bg-cyan;
+    }
+
+    &-dark {
+      @extend %bg-black;
+    }
+  }
+
+  &-tags {
+    @extend %flex;
+    @extend %align-items-center;
+    list-style: none;
+    @extend %margin-none;
+    @extend %padding-none;
+  }
+
+  &-tag {
+    margin-right: 3px;
+    padding: 2px 5px;
+    border-radius: #{$tag-radius}px;
+    @extend %bg-gray;
+    color: #FFF;
+    @extend %small-text;
+  }
+
+  &-checkbox {
+    width: #{$check-box-size}px;
+  }
+
+  &-no-content {
+    padding: #{$cell-space}px;
+
+    .v-table-text {
+      @extend %gray-color;
+    }
+  }
+
+  &-loading {
+    opacity: .7;
+  }
+
+  &-reloading {
+    .v-table-button-reload {
+      i {
+        @extend %animate-spin;
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+@import "library/utils";
+@import "./library/mixins";
+@import "library/extends";
+
+.v-radio {
+  @extend %block;
+  @extend %unselectable;
+  @extend %relative;
+  @extend %pointer;
+  font-size: 22px;
+
+  input {
+    @extend %absolute;
+    @extend %pointer;
+    top: 0;
+    left: 0;
+    @extend %margin-none;
+    @extend %padding-none;
+    opacity: 0;
+  }
+
+  &:not(.v-radio-labelled), input, &-mark {
+    @include round($check-box-size);
+  }
+
+  &.v-radio-labelled {
+    @extend %inline-flex;
+    @extend %align-items-center;
+
+    .v-radio-label {
+      margin-left: $check-box-size + 5px;
+      @extend %gray-color;
+      @extend %small-text;
+      @extend %unselectable;
+    }
+  }
+
+  &-mark {
+    @extend %absolute;
+    top: 0;
+    left: 0;
+    background-color: $box-color;
+
+    &:after {
+      content: "";
+      @extend %absolute;
+      display: none;
+      top: calc(50% - 3.5px);
+      left: calc(50% - 3.5px);
+      @include round(7);
+      background: white;
+    }
+  }
+
+  &:hover input ~ &-mark {
+    opacity: .9;
+  }
+
+  input:checked ~ &-mark {
+    background-color: $blue-color;
+  }
+
+  input:checked ~ &-mark:after {
+    @extend %block;
+  }
+}
