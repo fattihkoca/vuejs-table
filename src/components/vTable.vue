@@ -376,8 +376,6 @@
                 this.detailsOpened = true;
                 this.activeKey = row.key;
 
-                console.log(this.activeKey);
-
                 Vue.ajax({
                     url: this.c.detail.url,
                     method: this.c.detail.method || 'get',
