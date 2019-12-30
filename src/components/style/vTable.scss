@@ -20,7 +20,6 @@
   &-container {
     min-width: 100%;
     overflow-x: auto;
-    overscroll-behavior: contain;
 
     @include breakpoint(s) {
       min-width: auto;
