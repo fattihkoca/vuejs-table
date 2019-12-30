@@ -1,6 +1,6 @@
-@import "./library/utils";
-@import "./library/extends";
-@import "./library/mixins";
+@import "library/utils";
+@import "library/extends";
+@import "library/mixins";
 @import "./vCheckbox";
 @import "./vRadio";
 @import "./vProgress";
@@ -17,6 +17,16 @@
   @import "./vTableControl";
   @import "./vTableButton";
 
+  &-container {
+    min-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior: contain;
+
+    @include breakpoint(s) {
+      min-width: auto;
+    }
+  }
+
   &-field {
     display: table;
     table-layout: auto;
@@ -30,22 +40,30 @@
   &-row {
     @extend %relative;
     display: table-row;
-    @extend %overflow-hidden;
   }
 
   &-cell {
     @extend %relative;
     display: table-cell;
-    padding: #{$cell-space}px;
+    padding: #{$cell-mob-space}px;
     vertical-align: middle;
     border-top: 1px solid;
     @extend %border-color;
     color: $primary-color;
 
+    @include breakpoint(s) {
+      padding: #{$cell-space}px;
+    }
+
     &-wrapper {
       @extend %flex;
       flex-wrap: wrap;
       @extend %align-items-center;
+    }
+
+    &-status .v-table-cell-wrapper {
+      flex-wrap: nowrap;
+      white-space: nowrap;
     }
   }
 
@@ -66,6 +84,7 @@
     .v-table-cell {
       color: rgba($primary-color, .5);
       vertical-align: middle;
+      white-space: nowrap;
 
       .v-table-sort-icon {
         position: relative;

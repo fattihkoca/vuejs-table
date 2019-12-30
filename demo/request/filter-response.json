@@ -1,0 +1,54 @@
+{
+  "success": true,
+  "message": "The table has been filtered!",
+  "data": [
+    {
+      "key": 7,
+      "cells": [
+        {
+          "text": "Item Seven",
+          "status": "danger"
+        },
+        {
+          "rating": 10,
+          "text": "Terrible"
+        },
+        {
+          "html": "<a href='/'>Go to link</b>"
+        }
+      ]
+    },
+    {
+      "key": 8,
+      "cells": [
+        {
+          "text": "Item Eight"
+        },
+        {
+          "rating": 50
+        },
+        {
+          "status": "success",
+          "html": "<b>Excellent!</b>"
+        }
+      ]
+    },
+    {
+      "key": 9,
+      "cells": [
+        {
+          "status": "primary",
+          "text": "Item Nine",
+          "font": ["b"]
+        },
+        {
+          "rating": 75,
+          "text": "Very Good"
+        },
+        {
+          "tags": ["Vue.js", "Node.js", "Laravel", "Scss"]
+        }
+      ]
+    }
+  ]
+}

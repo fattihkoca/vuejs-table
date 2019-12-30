@@ -2,7 +2,7 @@
     <div v-if="c" class="v-table">
         <div :class="{'v-table-loading': loading, 'v-table-reloading': reloading}">
             <!-- Table actions -->
-            <div class="v-table-controls">
+            <div class="v-table-controls" :class="{'v-table-controls-sticky': c.sticky_controls}">
                 <div class="v-table-controls-wrapper">
                     <div class="v-table-controls-col">
                         <div v-if="size(d) && c.checkable && c.checkable_all"
@@ -32,13 +32,14 @@
                         </div>
                     </div>
                     <div class="v-table-controls-col">
-                        <div v-if="c.filter" class="v-table-control" :class="{'v-table-control-active': filterActive}">
-                            <v-table-button name="filter" :label="l.filter" @clicked="filter">
+                        <div v-if="typeof c.filters === 'object'" class="v-table-control"
+                             :class="{'v-table-control-active': filterActive}">
+                            <v-table-button name="filter" :label="l.filters" @clicked="filters">
                                 <v-filter-icon></v-filter-icon>
                             </v-table-button>
                         </div>
 
-                        <div v-if="c.search" class="v-table-control">
+                        <div v-if="c.search" class="v-table-control v-table-control-search">
                             <div class="v-table-search" @click.prevent.stop="focusSearch">
                                 <input v-model="form.search" value type="search"
                                        :placeholder="l.search"
@@ -55,119 +56,131 @@
             </div>
 
             <!-- Table container -->
-            <div v-if="size(d)" class="v-table-field">
-                <!-- Table head -->
-                <div v-if="size(c.head)" class="v-table-row-group">
-                    <!-- Table head row -->
-                    <div class="v-table-row v-table-head">
-                        <div class="v-table-cell v-table-checkbox"></div>
+            <div class="v-table-container">
 
-                        <div class="v-table-cell"
-                             :class="{
+                <!-- Table field -->
+                <div v-if="size(d)" class="v-table-field">
+                    <!-- Table head -->
+                    <div v-if="size(c.head)" class="v-table-row-group">
+                        <!-- Table head row -->
+                        <div class="v-table-row v-table-head">
+                            <div class="v-table-cell v-table-checkbox"></div>
+
+                            <div class="v-table-cell"
+                                 :class="{
                                 'v-table-sort-handle': c.sortable,
                                 'v-table-sort': ((!form.sort[0] && hi === 0) || form.sort[0] === head.key),
                                 'v-table-sort-asc': form.sort[1] === 'asc',
                                 'v-table-sort-desc': form.sort[1] === 'desc'
                              }"
-                             v-for="(head, hi) in c.head" :key="hi">
-                            <div class="v-table-head-label" @click="sort(head, $event)">
-                                <span v-text="head.label" :title="l.order_by + ' ' + head.label"></span>
-                                <i v-if="c.sortable" class="v-table-sort-icon"></i>
+                                 v-for="(head, hi) in c.head" :key="hi">
+                                <div class="v-table-head-label" @click="sort(head, $event)">
+                                    <span v-text="head.label" :title="l.order_by + ' ' + head.label"></span>
+                                    <i v-if="c.sortable" class="v-table-sort-icon"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Table body -->
-                <div class="v-table-row-group">
-                    <!-- Table body row -->
-                    <div v-for="(row, ri) in d"
-                         @click="detail(row, ri)"
-                         class="v-table-row"
-                         :class="{
+                    <!-- Table body -->
+                    <div class="v-table-row-group">
+
+                        <!-- Table body row -->
+                        <div v-for="(row, ri) in d"
+                             @click="detail(row, ri)"
+                             class="v-table-row"
+                             :class="{
                             'v-table-row-modified': currentRowIndex === ri,
                             'v-table-row-bounced': bouncedIndex === ri,
                             'v-table-row-deleted': removedRows.indexOf(ri) !== -1
                          }"
-                         :key="ri">
+                             :key="ri">
 
-                        <div v-if="c.checkable" class="v-table-cell v-table-checkbox" @click.stop>
-                            <v-checkbox :value="row.key" :values="selected" @input="checkRow(row.key, $event)"></v-checkbox>
-                        </div>
+                            <div v-if="c.checkable" class="v-table-cell v-table-checkbox" @click.stop>
+                                <v-checkbox :value="row.key" :values="selected"
+                                            @input="checkRow(row.key, $event)"></v-checkbox>
+                            </div>
 
-                        <!-- Table body row cell -->
-                        <div v-if="row.cells" v-for="(cell, ci) in row.cells" :key="ci" class="v-table-cell"
-                             :class="{
+                            <!-- Table body row cell -->
+                            <div v-if="row.cells" v-for="(cell, ci) in row.cells" :key="ci" class="v-table-cell"
+                                 :class="{
                                 ['v-table-cell-'+ cell.type]: cell.type,
+                                ['v-table-cell-status']: cell.status,
                                 ['v-table-cell-status-'+ cell.status]: cell.status
                              }"
-                             :data-size="cell.list ? size(cell.list) : null">
+                                 :data-size="cell.list ? size(cell.list) : null">
 
-                            <div class="v-table-cell-wrapper">
-                                <span v-if="ri === 0 && row.buttons && size(row.buttons)" class="v-table-item">
-                                    <a v-for="(button, bi) in row.buttons" :key="bi"
-                                       class="v-table-row-button"
-                                       :class="['v-table-row-button-'+ bi]"
-                                       @click.prevent.stop="action(bi, button, $event)"
-                                       :title="button.label"></a>
-                                </span>
+                                <div class="v-table-cell-wrapper">
+                                    <span v-if="ri === 0 && row.buttons && size(row.buttons)" class="v-table-item">
+                                        <a v-for="(button, bi) in row.buttons" :key="bi"
+                                           class="v-table-row-button"
+                                           :class="['v-table-row-button-'+ bi]"
+                                           @click.prevent.stop="action(bi, button, $event)"
+                                           :title="button.label"></a>
+                                    </span>
 
-                                <figure v-if="cell.image" :class="{['v-table-img-' + cell.imageSize]: cell.imageSize}"
-                                        class="v-table-img v-table-item">
-                                    <img v-if="cell.image" :src="cell.image" :alt="cell.image_alt">
-                                </figure>
+                                    <figure v-if="cell.image"
+                                            :class="{['v-table-img-' + cell.imageSize]: cell.imageSize}"
+                                            class="v-table-img v-table-item">
+                                        <img v-if="cell.image" :src="cell.image" :alt="cell.image_alt">
+                                    </figure>
 
-                                <i v-if="cell.status" class="v-table-status v-table-item"
-                                   :class="{['v-table-status-' + cell.status]: cell.status}"></i>
+                                    <i v-if="cell.status" class="v-table-status v-table-item"
+                                       :class="{['v-table-status-' + cell.status]: cell.status}"></i>
 
-                                <ul v-if="cell.tags" class="v-table-tags v-table-item">
-                                    <li v-for="(tag, ti) in cell.tags" class="v-table-tag" :class="{
+                                    <ul v-if="cell.tags" class="v-table-tags v-table-item">
+                                        <li v-for="(tag, ti) in cell.tags" class="v-table-tag" :class="{
                                       'v-table-text-bold': cell.font && cell.font.indexOf('b') !== -1,
                                       'v-table-text-italic': cell.font && cell.font.indexOf('i') !== -1,
                                       'v-table-text-underline': cell.font && cell.font.indexOf('u') !== -1,
                                       ['v-table-text-' + cell.size]: cell.size,
                                       }" v-text="tag" :key="ti"></li>
-                                </ul>
+                                    </ul>
 
-                                <ul v-if="cell.list" class="v-table-list v-table-item"
-                                    :ref="'list-' + ri +'-'+ ci">
-                                    <li v-for="(list, li) in cell.list" class="table-cell-list-item"
-                                        :class="{'v-table-list-fancy' : list.image !== undefined}" :key="li">
+                                    <ul v-if="cell.list" class="v-table-list v-table-item"
+                                        :ref="'list-' + ri +'-'+ ci">
+                                        <li v-for="(list, li) in cell.list" class="table-cell-list-item"
+                                            :class="{'v-table-list-fancy' : list.image !== undefined}" :key="li">
                                             <span class="v-table-list-image">
                                               <img v-if="list.image" :src="list.image" :alt="list.label">
                                             </span>
-                                        <span class="v-table-list-label" v-text="list.label"></span>
-                                    </li>
-                                </ul>
+                                            <span class="v-table-list-label" v-text="list.label"></span>
+                                        </li>
+                                    </ul>
 
-                                <v-rating v-if="cell.hasOwnProperty('rating')" :value="cell.rating" class="v-table-item"></v-rating>
+                                    <v-rating v-if="cell.hasOwnProperty('rating')" :value="cell.rating"
+                                              class="v-table-item"></v-rating>
 
-                                <v-progress v-if="cell.progress" :value="cell.progress"
-                                            class="v-table-item"></v-progress>
+                                    <v-progress v-if="cell.progress" :value="cell.progress"
+                                                class="v-table-item"></v-progress>
 
-                                <span v-if="cell.text" v-text="cell.text" class="v-table-text v-table-item"
-                                      :class="{
+                                    <span v-if="cell.text" v-text="cell.text" class="v-table-text v-table-item"
+                                          :class="{
                                       'v-table-text-bold': cell.font && cell.font.indexOf('b') !== -1,
                                       'v-table-text-italic': cell.font && cell.font.indexOf('i') !== -1,
                                       'v-table-text-underline': cell.font && cell.font.indexOf('u') !== -1,
                                       ['v-table-text-' + cell.size]: cell.size,
                                       }"></span>
 
-                                <span v-if="cell.html" v-html="cell.html" class="v-table-html v-table-item"></span>
+                                    <span v-if="cell.html" v-html="cell.html" class="v-table-html v-table-item"></span>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div v-if="!size(d)" class="v-table-no-content">
-                <span class="v-table-text" v-text="l.no_content"></span>
+                <div v-if="!size(d)" class="v-table-no-content">
+                    <span class="v-table-text" v-text="l.no_content"></span>
+                </div>
             </div>
         </div>
 
         <overlay :opened="detailsOpened" :visible="detailsVisible" @closed="detailsClosed"
                  :animate="c.overlay_animate">
             <v-table-form v-if="formVisible" :data="formData" @success="afterFormSuccess"></v-table-form>
+
+            <v-table-form v-if="filtersVisible" :data="c.filters" @success="afterFilterSuccess"></v-table-form>
         </overlay>
     </div>
 </template>
@@ -208,7 +221,7 @@
                 defConf: {
                     buttons: false,
                     reload: true,
-                    filter: false,
+                    filters: false,
                     search: true,
                     head: {},
                     create: false,
@@ -217,6 +230,7 @@
                     checkable: true,
                     checkable_all: true,
                     overlay_animate: null,
+                    sticky_controls: true,
                 },
                 d: {},
                 form: {
@@ -226,10 +240,10 @@
                 },
                 l: {},
                 defLang: {
-                    filter: 'Filter',
                     order_by: 'Order by',
                     select_all: 'Select all',
                     reload: 'Reload',
+                    filters: 'Filters',
                     search: 'Search',
                     create: 'Create',
                     delete: 'Delete',
@@ -251,6 +265,7 @@
                 formVisible: false,
                 formData: {},
                 formType: null,
+                filtersVisible: false,
                 activeKey: null
             };
         },
@@ -330,16 +345,23 @@
                 this.sendRequest();
                 this.focusSearch();
             },
-            filter() {
-
-            },
             detailsClosed() {
-                this.detailsOpened = this.detailsVisible = this.formVisible = false;
+                this.detailsOpened = this.detailsVisible = this.formVisible = this.filtersVisible = false;
                 this.formData = {};
                 this.activeKey = null;
             },
+            filters() {
+                this.detailsOpened = true;
+                this.detailsVisible = true;
+                this.filtersVisible = true;
+                this.formVisible = false;
+            },
+            afterFilterSuccess(data) {
+                this.d = data;
+                this.detailsClosed();
+            },
             create() {
-                if(this.c.create.model !== 'form') {
+                if (this.c.create.model !== 'form') {
                     window.location.href = this.c.create.url;
                     return;
                 }
@@ -358,15 +380,16 @@
                 }).then(response => {
                     this.formData = response.data;
                     this.formVisible = true;
+                    this.filtersVisible = false;
                     this.formType = 'create';
                 });
             },
             detail(row) {
-                if(!this.c.detail) {
+                if (!this.c.detail) {
                     return;
                 }
 
-                if(this.c.detail.model !== 'form') {
+                if (this.c.detail.model !== 'form') {
                     window.location.href = this.c.detail.url;
                     return;
                 }
@@ -415,11 +438,11 @@
                 }
             },
             afterFormSuccess(d) {
-                if(this.formType === 'create') {
+                if (this.formType === 'create') {
                     this.d.push(d);
 
                     setTimeout(this.detailsClosed, 1000);
-                } else if(this.formType === 'detail') {
+                } else if (this.formType === 'detail') {
                     let index = this.array_lookup(this.d, 'key', this.activeKey);
                     this.$set(this.d, index, d);
                 }

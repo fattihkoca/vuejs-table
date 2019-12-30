@@ -1,9 +1,21 @@
-@import "./library/utils";
-@import "./library/mixins";
-@import "./library/extends";
+@import "library/utils";
+@import "library/mixins";
+@import "library/extends";
 
 .v-table-controls {
-  padding: #{$cell-space}px #{$cell-space}px 0 #{$cell-space}px;
+  padding: #{$cell-mob-space}px #{$cell-mob-space}px 0 #{$cell-mob-space}px;
+
+  @include breakpoint(s) {
+    padding: #{$cell-space}px #{$cell-space}px 0 #{$cell-space}px;
+  }
+
+  &-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background: $white-color;
+    z-index: 999;
+  }
 
   &-wrapper {
     display: grid;
@@ -24,13 +36,22 @@
 .v-table-control {
   margin: 0 #{$cell-space}px #{$cell-space}px 0;
 
+  &-search {
+    display: none;
+
+    @include breakpoint(s) {
+      display: block;
+    }
+  }
+
   .v-table-search {
+    display: none;
     @extend %flex;
     @extend %align-items-center;
+    @extend %overflow-hidden;
     padding: $search-padding;
     background: $box-color;
     border-radius: #{$box-radius}px;
-    @extend %overflow-hidden;
 
     input {
       min-width: 200px;

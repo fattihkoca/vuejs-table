@@ -1,4 +1,4 @@
-@import "./utils";
+@import "utils";
 
 %fixed {
   position: fixed;
@@ -18,7 +18,7 @@
   display: block
 }
 
-%hide {
+%hidden {
   display: none;
 }
 

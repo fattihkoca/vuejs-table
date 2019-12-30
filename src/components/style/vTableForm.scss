@@ -1,6 +1,6 @@
-@import "./library/utils";
-@import "./library/mixins";
-@import "./library/extends";
+@import "library/utils";
+@import "library/mixins";
+@import "library/extends";
 
 .v-table-form {
   &-header {
@@ -75,16 +75,25 @@
   }
 
   &-elements {
-    @extend %flex;
-    flex-wrap: wrap;
-    width: 100%;
+    display: block;
+
+    @include breakpoint(s) {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+    }
   }
 
   &-element {
     width: 100%;
 
     &:nth-child(n+2) {
-      margin-left: #{$head-padding}px;
+      margin-top: #{$head-padding}px;
+
+      @include breakpoint(s) {
+        margin-top: 0;
+        margin-left: #{$head-padding}px;
+      }
     }
 
     input[type=text], input[type=password], input[type=number], input[type=date], input[type=email], input[type=tel], input[type=url], input[type=week], input[type=month], textarea, select {
@@ -108,7 +117,7 @@
       -moz-appearance: none;
 
       &::-ms-expand {
-        @extend %hide;
+        @extend %hidden;
       }
     }
   }

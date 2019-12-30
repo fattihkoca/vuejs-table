@@ -1,6 +1,6 @@
-@import "./library/utils";
-@import "./library/mixins";
-@import "./library/extends";
+@import "library/utils";
+@import "library/mixins";
+@import "library/extends";
 
 .v-table-button {
   @extend %pointer;

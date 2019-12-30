@@ -1,0 +1,56 @@
+@mixin size($width, $height: $width, $overflow: hidden) {
+  width: #{$width}px;
+  height: #{$height}px;
+  overflow: $overflow;
+}
+
+@mixin round($size) {
+  @include size($size);
+  border-radius: #{$size}px;
+}
+
+@mixin breakpoint($min: 0, $max: 0) {
+  $type: type-of($min);
+
+  @if $type == string {
+    @if $min == t {
+      @media (max-width: 360px) {
+        @content;
+      }
+    } @else if $min == xxs {
+      @media (max-width: 488px) {
+        @content;
+      }
+    } @else if $min == s {
+      @media (min-width: 768px) {
+        @content;
+      }
+    } @else if $min == m {
+      @media (min-width: 992px) {
+        @content;
+      }
+    } @else if $min == l {
+      @media (min-width: 1200px) {
+        @content;
+      }
+    } @else if $min == xl {
+      @media (min-width: 1600px) {
+        @content;
+      }
+    }
+  } @else if $type == number {
+    $query: "all" !default;
+
+    @if $min != 0 and $max != 0 {
+      $query: "(min-width: #{$min}) and (max-width: #{$max})";
+    } @else if $min != 0 and $max == 0 {
+      $query: "(min-width: #{$min})";
+    } @else if $min == 0 and $max != 0 {
+      $query: "(max-width: #{$max})";
+    }
+
+    @media #{$query} {
+      @content;
+    }
+  }
+}

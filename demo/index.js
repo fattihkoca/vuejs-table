@@ -40,7 +40,54 @@ new Vue({
                     key: 'third',
                     label: 'Third Column'
                 },
-            ]
+            ],
+            filters: {
+                request: {
+                    url: '/request/filter-response.json',
+                    method: 'get',
+                    label: 'Filter'
+                },
+                header: {
+                    title: 'Filter',
+                    subtitle: 'With this form, you can filter to the table rows.'
+                },
+                form: [
+                    {
+                        title: 'Filter One',
+                        elements: [
+                            {
+                                type: 'radio',
+                                name: 'one',
+                                value: 'one-first',
+                                label: 'Opt 1'
+                            },
+                            {
+                                type: 'radio',
+                                name: 'one',
+                                value: 'one-second',
+                                label: 'Opt 2'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Filter Two',
+                        elements: [
+                            {
+                                type: 'checkbox',
+                                name: 'two',
+                                value: 'one',
+                                label: 'Opt 3'
+                            },
+                            {
+                                type: 'checkbox',
+                                name: 'three',
+                                value: 'one',
+                                label: 'Opt 4'
+                            }
+                        ]
+                    }
+                ]
+            },
         },
         vTableData: {}
     },

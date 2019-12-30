@@ -3,8 +3,7 @@
     "key": 1,
     "cells": [
       {
-        "text": "Item One",
-        "bgColor": "blue"
+        "text": "Item One"
       },
       {
         "rating": 50
@@ -43,7 +42,7 @@
         "progress": 75
       },
       {
-        "image": "/request/image.jpeg",
+        "image": "request/image.jpeg",
         "imageSize": "medium",
         "text": "My cute dog 😍"
       }
@@ -62,9 +61,230 @@
         "font": ["b", "i", "u"]
       },
       {
-        "image": "/request/icon.svg",
+        "image": "request/icon.svg",
         "imageSize": "small",
         "text": "Processing"
+      }
+    ]
+  },
+  {
+    "key": 5,
+    "cells": [
+      {
+        "text": "Item Five",
+        "size": "small"
+      },
+      {
+        "progress": 55
+      },
+      {
+        "image": "request/image.jpeg",
+        "imageSize": "medium",
+        "text": "My cute dog 😍"
+      }
+    ]
+  },
+  {
+    "key": 6,
+    "cells": [
+      {
+        "text": "Item Six",
+        "size": "small"
+      },
+      {
+        "rating": 100,
+        "text": "Amazing"
+      },
+      {
+        "image": "request/icon.svg",
+        "imageSize": "small",
+        "text": "Processing"
+      }
+    ]
+  },
+  {
+    "key": 7,
+    "cells": [
+      {
+        "text": "Item Seven",
+        "status": "danger"
+      },
+      {
+        "rating": 10,
+        "text": "Terrible"
+      },
+      {
+        "html": "<a href='/'>Go to link</b>"
+      }
+    ]
+  },
+  {
+    "key": 8,
+    "cells": [
+      {
+        "text": "Item Eight"
+      },
+      {
+        "rating": 50
+      },
+      {
+        "status": "success",
+        "html": "<b>Excellent!</b>"
+      }
+    ]
+  },
+  {
+    "key": 9,
+    "cells": [
+      {
+        "status": "primary",
+        "text": "Item Nine",
+        "font": ["b"]
+      },
+      {
+        "rating": 75,
+        "text": "Very Good"
+      },
+      {
+        "tags": ["Vue.js", "Node.js", "Laravel", "Scss"]
+      }
+    ]
+  },
+  {
+    "key": 10,
+    "cells": [
+      {
+        "text": "Item Ten",
+        "size": "big",
+        "image": "request/image.jpeg",
+        "imageSize": "small"
+      },
+      {
+        "progress": 75
+      },
+      {
+        "image": "request/image.jpeg",
+        "imageSize": "medium",
+        "text": "My cute dog 😍"
+      }
+    ]
+  },
+  {
+    "key": 11,
+    "cells": [
+      {
+        "text": "Item Eleven",
+        "size": "small"
+      },
+      {
+        "text": "Item Four",
+        "size": "small",
+        "font": ["b", "i", "u"]
+      },
+      {
+        "image": "request/icon.svg",
+        "imageSize": "small",
+        "text": "Processing"
+      }
+    ]
+  },
+  {
+    "key": 12,
+    "cells": [
+      {
+        "text": "Item Twelve",
+        "size": "small"
+      },
+      {
+        "progress": 55
+      },
+      {
+        "image": "request/image.jpeg",
+        "imageSize": "medium",
+        "text": "My cute dog 😍"
+      }
+    ]
+  },
+  {
+    "key": 13,
+    "cells": [
+      {
+        "text": "Item Thirteen",
+        "size": "small"
+      },
+      {
+        "rating": 100,
+        "text": "Amazing"
+      },
+      {
+        "image": "request/icon.svg",
+        "imageSize": "small",
+        "text": "Processing"
+      }
+    ]
+  },
+  {
+    "key": 14,
+    "cells": [
+      {
+        "text": "Item Fourteen",
+        "status": "danger"
+      },
+      {
+        "rating": 10,
+        "text": "Terrible"
+      },
+      {
+        "html": "<a href='/'>Go to link</b>"
+      }
+    ]
+  },
+  {
+    "key": 15,
+    "cells": [
+      {
+        "text": "Item Fifteen",
+        "status": "info"
+      },
+      {
+        "rating": 60,
+        "text": "Good"
+      },
+      {
+        "text": "21 Aug 2020, 11:00"
+      }
+    ]
+  },
+  {
+    "key": 16,
+    "cells": [
+      {
+        "image": "request/image.jpeg",
+        "imageSize": "big",
+        "text": "Item Sixteen"
+      },
+      {
+        "rating": 100,
+        "text": "Amazing"
+      },
+      {
+        "text": "21 Aug 2020, 11:00",
+        "status": "dark"
+      }
+    ]
+  },
+  {
+    "key": 17,
+    "cells": [
+      {
+        "text": "Item Seventeen",
+        "status": "warning"
+      },
+      {
+        "progress": 5
+      },
+      {
+        "text": "21 Aug 2020, 11:00"
       }
     ]
   }

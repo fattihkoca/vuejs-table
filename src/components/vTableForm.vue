@@ -1,5 +1,5 @@
 <template>
-    <div class="v-table-form" :class="{'v-table-form-loading': loading}">
+    <div v-if="data" class="v-table-form" :class="{'v-table-form-loading': loading}">
         <header v-if="data.header && (data.header.title || data.header.subtitle)" class="v-table-form-header">
             <h1 class="v-table-form-title" v-text="data.header.title"></h1>
             <h2 class="v-table-form-subtitle" v-text="data.header.subtitle"></h2>
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="v-table-form-row"
+            <div v-if="data.form" class="v-table-form-row"
                  :class="{'v-table-form-labelled': data.form.slice(-1)[0] && data.form.slice(-1)[0].hasOwnProperty('title')}">
                 <div v-if="data.form.slice(-1)[0] && data.form.slice(-1)[0].hasOwnProperty('title')"
                      class="v-table-form-col"></div>
